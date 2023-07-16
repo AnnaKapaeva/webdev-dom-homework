@@ -62,4 +62,70 @@
       </div>
     </div>
   </body>
+  <style>
+    .error {
+      background-color: red;
+    }
+  </style>
+
+  <script>
+    "use strict";
+    const buttonInputElement = document.querySelector('.add-form-button');
+    const nameInputElement = document.getElementById("name_input");
+    const commentInputElement = document.getElementById("comment_input");
+    const listElement = document.querySelector(".comments");
+
+    let years = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    };
+
+    let time = {
+      hour: 'numeric',
+      minute: 'numeric'
+    };
+
+    let currentDateElement = new Date();
+ 
+    buttonInputElement.addEventListener("click", () => {
+      nameInputElement.classList.remove("error");
+      commentInputElement.classList.remove("error");
+      if(nameInputElement.value === "" && commentInputElement.value === "") {
+        nameInputElement.classList.add("error");
+        commentInputElement.classList.add("error");
+        return;
+      }
+
+      const oldListHtml = listElement.innerHTML;
+      
+      listElement.innerHTML += `<li  class="comment">
+          <div class="comment-header">
+            <div>
+              ${nameInputElement.value}
+            <div>
+              ${currentDateElement.toLocaleString("ru", years) + " " + currentDateElement.toLocaleString("ru", time)}
+            </div>
+            </div>
+          </div>
+          <div class="comment-body">
+            <div class="comment-text">
+              ${commentInputElement.value}
+            </div>
+          </div>
+          <div class="comment-footer">
+            <div class="likes">
+              <span class="likes-counter">0</span>
+              <button class="like-button">
+              </button>
+            </div>
+          </div>
+        </li>`
+
+        nameInputElement.value = "";
+        commentInputElement.value = "";
+      }); 
+    // console.log("It works!");
+  </script>
+</html>
 
