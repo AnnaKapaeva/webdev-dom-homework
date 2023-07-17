@@ -91,12 +91,12 @@
 
     buttonInputElement.addEventListener("click", () => {
       nameInputElement.classList.remove("error") && commentInputElement.classList.remove("error");
-      if((nameInputElement.value === "") && (commentInputElement.value === "")) {
+      if((nameInputElement.value === "") || (commentInputElement.value === "")) {
         nameInputElement.classList.add("error");
         commentInputElement.classList.add("error");
         return;
       }
-      // if(nameInputElement.value.length === 0 && commentInputElement.value.length === 0) {
+      // if(nameInputElement.value.length === 0 || commentInputElement.value.length === 0) {
       //   nameInputElement.classList.add("error");
       //   commentInputElement.classList.add("error");
       //   return;
