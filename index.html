@@ -87,15 +87,20 @@
     };
 
     let currentDateElement = new Date();
- 
+
+
     buttonInputElement.addEventListener("click", () => {
-      nameInputElement.classList.remove("error");
-      commentInputElement.classList.remove("error");
-      if(nameInputElement.value === "" && commentInputElement.value === "") {
+      nameInputElement.classList.remove("error") && commentInputElement.classList.remove("error");
+      if((nameInputElement.value === "") || (commentInputElement.value === "")) {
         nameInputElement.classList.add("error");
         commentInputElement.classList.add("error");
         return;
       }
+      // if(nameInputElement.value.length === 0 || commentInputElement.value.length === 0) {
+      //   nameInputElement.classList.add("error");
+      //   commentInputElement.classList.add("error");
+      //   return;
+      // }
 
       const oldListHtml = listElement.innerHTML;
       
@@ -103,7 +108,7 @@
           <div class="comment-header">
             <div>
               ${nameInputElement.value}
-            <div>
+            </div>
               ${currentDateElement.toLocaleString("ru", years) + " " + currentDateElement.toLocaleString("ru", time)}
             </div>
             </div>
