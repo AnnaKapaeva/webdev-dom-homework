@@ -142,7 +142,7 @@
           <div class="comment-footer">
             <div class="likes">
               <span class="likes-counter">${allComment.likesCounter}</span>
-              <button class="like-button" data-index = ${index}></button>
+              <button class="like-button  ${allComment.liked ? '-active-like' : ''}" data-index = ${index}></button>
             </div>
           </div>
         </li>`
