@@ -106,7 +106,6 @@
       },
     ];
 
-    
     // const oldListHtml = listElement.innerHTML;
 
 
@@ -128,7 +127,6 @@
     initLikeButtonsListeners();
 
 
-
     const renderAllComment = () => {
       const allCommentHTML = allComment.map((allComment, index) => {
         return `<li  class="comment">
@@ -142,7 +140,7 @@
           <div class="comment-footer">
             <div class="likes">
               <span class="likes-counter">${allComment.likesCounter}</span>
-              <button class="like-button  ${allComment.liked ? '-active-like' : ''}" data-index = ${index}></button>
+              <button class="like-button ${allComment.liked ? '-active-like' : ''}" data-index = ${index}></button>
             </div>
           </div>
         </li>`
@@ -151,7 +149,6 @@
       initLikeButtonsListeners();
     };
     renderAllComment();
-    
 
 
       buttonInputElement.addEventListener('click', addComment);
@@ -168,51 +165,42 @@
         }
 
       allComment.push({
-        name: nameInputElement.value,
+        name: nameInputElement.value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;'),
+        comment: commentInputElement.value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;'),
         time: currentDateElement.toLocaleString("ru", years) + " " + currentDateElement.toLocaleString("ru", time),
-        comment: commentInputElement.value,
         likesCounter: 0,
         liked: false,
       });
       renderAllComment();
     };
-  
 
-        // buttonInputElement.addEventListener("click", () => {
-    //   nameInputElement.classList.remove("error") && commentInputElement.classList.remove("error");
-    //   if((nameInputElement.value === "") || (commentInputElement.value === "")) {
-    //     nameInputElement.classList.add("error");
-    //     commentInputElement.classList.add("error");
-    //     return;
-    //   }
-    // });
 
-      // listElement.innerHTML += `<li  class="comment">
-      //     <div class="comment-header">
-      //       <div>
-      //         ${nameInputElement.value}
-      //       </div>
-      //         ${currentDateElement.toLocaleString("ru", years) + " " + currentDateElement.toLocaleString("ru", time)}
-      //       </div>
-      //       </div>
-      //     </div>
-      //     <div class="comment-body">
-      //       <div class="comment-text">
-      //         ${commentInputElement.value}
-      //       </div>
-      //     </div>
-      //     <div class="comment-footer">
-      //       <div class="likes">
-      //         <span class="likes-counter">0</span>
-      //         <button class="like-button">
-      //         </button>
-      //       </div>
-      //     </div>
-      //   </li>`
+    // Ответ на комментарий
 
-      //   nameInputElement.value = "";
-      //   commentInputElement.value = "";
-     
+
+    const newComment = () => {
+        const commentElements = document.querySelectorAll('.comment');
+        for(const commentElement of commentElements) {
+          commentElement.addEventListener('click', () => {
+            const newText = `${allComment.name} : ${allComment.comment}`
+            commentInputElement.value = newText;
+          });
+        }
+      }
+      newComment();
+
+
+    // безопасный код
+
+      // const replaceValue = (value) => {
+      //   .replaceAll('&', '&amp;')
+      //   .replaceAll('<', '&lt;')
+      //   .replaceAll('>', '&gt;')
+      //   .replaceAll('"', '&quot;')
+      //   return value;
+      // };
+      // renderAllComment();
+
 
     // console.log("It works!");
   </script>
