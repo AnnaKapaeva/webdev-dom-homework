@@ -106,7 +106,6 @@
       },
     ];
 
-    
     // const oldListHtml = listElement.innerHTML;
 
 
@@ -150,7 +149,6 @@
       initLikeButtonsListeners();
     };
     renderAllComment();
-    
 
 
       buttonInputElement.addEventListener('click', addComment);
@@ -167,9 +165,9 @@
         }
 
       allComment.push({
-        name: nameInputElement.value,
+        name: nameInputElement.value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;'),
+        comment: commentInputElement.value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;'),
         time: currentDateElement.toLocaleString("ru", years) + " " + currentDateElement.toLocaleString("ru", time),
-        comment: commentInputElement.value,
         likesCounter: 0,
         liked: false,
       });
@@ -177,8 +175,8 @@
     };
 
 
-
     // Ответ на комментарий
+
 
     const newComment = () => {
         const commentElements = document.querySelectorAll('.comment');
@@ -188,7 +186,9 @@
             commentInputElement.value = newText;
           });
         }
-      };
+      }
+      newComment();
+
 
     // безопасный код
 
@@ -201,26 +201,6 @@
       // };
       // renderAllComment();
 
-      // allComment.push({
-      //   name: nameInputElement.value,
-      //   const replaceValue = (value) => {
-      //    return value;
-      //   .replaceAll('&', '&amp;')
-      //   .replaceAll('<', '&lt;')
-      //   .replaceAll('>', '&gt;')
-      //   .replaceAll('"', '&quot;')
-      // };
-      //   time: currentDateElement.toLocaleString("ru", years) + " " + currentDateElement.toLocaleString("ru", time),
-      //   comment: commentInputElement.value,
-      //   likesCounter: 0,
-      //   liked: false,
-      // });
-      // renderAllComment();
-
-
-        nameInputElement.value = "";
-        commentInputElement.value = "";
-     
 
     // console.log("It works!");
   </script>
